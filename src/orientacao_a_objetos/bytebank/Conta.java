@@ -9,7 +9,30 @@ public class Conta {
     int numero;
     String titular;
 
-    public static void main(String[] args) {
+    public void deposita(double valor){
+        this.saldo = this.saldo + valor;
+    }
 
+    public boolean saca(double valor){
+        if(this.saldo >= valor){
+            this.saldo = this.saldo - valor;
+            //System.out.println("Sacando R$" + valor);
+            return true;
+        } else {
+            System.out.println("Saldo insuficiente, saque não realizado");
+            return false;
+        }
+    }
+
+    public boolean transfere(double valor, Conta contaDestino){
+        if(this.saldo >= valor){
+            saca(valor);
+            System.out.println("Transferindo R$" + valor);
+            contaDestino.deposita(valor);
+            return true;
+        } else {
+            System.out.println("Transferência não realizada");
+            return false;
+        }
     }
 }
